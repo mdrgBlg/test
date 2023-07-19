@@ -1,17 +1,18 @@
-import Navbar from "./usersScreen/Navbar"
-import { Routes, Route } from 'react-router-dom'
+import {BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Users } from "./pages/userPage"
+import { Posts } from "./pages/postPage"
 
-import Posts from "./usersScreen/Posts"
-import Users from "./usersScreen/Users"
+
 
 
 function App() {
   return(
-    <>
-    <Navbar />
-    
-    
-    </>
+    <BrowserRouter>
+      <Routes>
+          <Route path="/" element={<Users />}/>
+          <Route path="posts" element={<Posts />}/>
+      </Routes>
+    </BrowserRouter>
   )
 
   
