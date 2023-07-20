@@ -35,7 +35,6 @@ const Users: React.FC = () => {
 
     return(
        <div>
-            <Navbar></Navbar>
             <UserCard data={users}></UserCard>
        </div>
     )
