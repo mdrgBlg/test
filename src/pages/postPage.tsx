@@ -32,7 +32,6 @@ const Posts: React.FC = () => {
     console.log(posts);
     return(
         <div>
-            <Navbar />
             <PostCard posts={posts}/>
         </div>
         
