@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
     <Navbar/>
       <Routes>
-          <Route path="/" Component={Users}/>
+          <Route path="/" element={<Users />}/>
           <Route path="posts" element={<Posts />}/>
       </Routes>
     </BrowserRouter>
