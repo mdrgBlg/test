@@ -1,5 +1,6 @@
 
-interface Data {
+interface CardData {
+    id: number;
     name: string;
     username: string;
     email: string;
@@ -7,7 +8,7 @@ interface Data {
   }
 
   interface DataCardProps{
-    data: Data[];
+    data: CardData[];
   }
 
 const UserCard: React.FC<DataCardProps> = ({data}) => {
@@ -18,23 +19,23 @@ const UserCard: React.FC<DataCardProps> = ({data}) => {
             <table className="w-2/3  text-base text-left text-gray-500">
                 <thead className="text-sm text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" className="px-6 py-3">
+                        <th className="px-6 py-3">
                             Name
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th className="px-6 py-3">
                             Username
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th className="px-6 py-3">
                             Email
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th className="px-6 py-3">
                             Phone 
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((item) =>(
-                        <tr className="bg-white border-b">
+                        <tr  key={item.id} className="bg-white border-b">
                             <td className="px-6 py-4">{item.name}</td>
                             <td className="px-6 py-4">{item.username}</td>
                             <td className="px-6 py-4">{item.email}</td>

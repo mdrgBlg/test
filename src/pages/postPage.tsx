@@ -1,18 +1,41 @@
+import Navbar from "../components/Navbar";
+import { PostCard } from "../components/PostsCard";
 import { fetchDataPosts } from "../hooks/axios";
 import { useState, useEffect } from 'react';
 
+interface PostData {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
 
+}
 
-const Posts = () => {
-    const [posts, setPosts] = useState([]);
+const Posts: React.FC = () => {
+    const [posts, setPosts] = useState<PostData[]>([]);
+
     useEffect(() => {
-        fetchDataPosts().then((posts) => setPosts(posts))
+        try{
+        (
+            async () => {
+            const posts = await fetchDataPosts();
+            setPosts(posts);
+            }
+        )
+        ();
         
+        }
+        catch(err){
+            console.log("ERROR ASYNC/AWAIT",err);
+        }
     },[]);
     console.log(posts);
     return(
+        <div>
+            <Navbar />
+            <PostCard posts={posts}/>
+        </div>
         
-        <div>Posts</div>
     )
 
 }

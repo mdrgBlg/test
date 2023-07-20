@@ -4,7 +4,8 @@ import { useState, useEffect} from "react";
 import { UserCard } from "../components/UserCard";
 
 
-interface Data {
+interface CardData {
+    id:number;
     name: string;
     username: string;
     email: string;
@@ -14,11 +15,20 @@ interface Data {
 
 const Users: React.FC = () => {
 
-    const [users,setUsers] = useState<Data[]>([]);
+    const [users,setUsers] = useState<CardData[]>([]);
 
     useEffect(() => {
-        
-        fetchDataUsers().then((usersData) => setUsers(usersData))
+        try{
+        const asyncAwaitData = async ()  => {
+            const result = await fetchDataUsers();
+            setUsers(result);
+        }
+        asyncAwaitData();
+        }
+        catch(err){
+            console.log("ERROR ASYNC/AWAIT",err);
+        }
+  
     },[])
 
     console.log(users);
