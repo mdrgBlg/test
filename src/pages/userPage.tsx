@@ -1,10 +1,9 @@
-import Navbar from "../components/Navbar";
-import { fetchDataUsers } from "../hooks/axios";
 import { useState, useEffect} from "react";
 import { UserCard } from "../components/UserCard";
+import axios from "axios"
 
 
-interface CardData {
+interface UserModel {
     id:number;
     name: string;
     username: string;
@@ -15,23 +14,21 @@ interface CardData {
 
 const Users: React.FC = () => {
 
-    const [users,setUsers] = useState<CardData[]>([]);
+    const [users,setUsers] = useState<UserModel[]>([]);
 
-    useEffect(() => {
+    const fetchDataUsers = async () => {
         try{
-        const asyncAwaitData = async ()  => {
-            const result = await fetchDataUsers();
-            setUsers(result);
+            const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+            const users:UserModel[] = response.data as UserModel[];
+            setUsers(users);
+        } catch(err){
+            console.log('ERROR ',err);
         }
-        asyncAwaitData();
-        }
-        catch(err){
-            console.log("ERROR ASYNC/AWAIT",err);
-        }
-  
-    },[])
+    }
 
-    console.log(users);
+    useEffect( () => {
+        fetchDataUsers();
+    },[])
 
     return(
        <div>
